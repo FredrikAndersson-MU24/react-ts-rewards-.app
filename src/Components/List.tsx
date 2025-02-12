@@ -1,9 +1,9 @@
-export interface Task {
-    id: number;
-    title: string;
-    description: string;
+interface ListProps {
+    li: React.ReactNode;
 }
 
-const List = () => {
-    return <ul></ul>;
+const List = (props: ListProps) => {
+    return <ul>{props.li}</ul>;
 };
+
+export default List;
