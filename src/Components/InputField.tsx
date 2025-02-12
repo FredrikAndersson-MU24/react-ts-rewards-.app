@@ -1,18 +1,23 @@
-import React, { ReactEventHandler } from "react";
-
 interface InputFieldProps {
     type: string;
-    placeholder: string;
     onchange: React.ChangeEventHandler<HTMLInputElement>;
 }
 
 const InputField = (props: InputFieldProps) => {
     return (
-        <input
-            type={props.type}
-            placeholder={props.placeholder}
-            onChange={props.onchange}
-        />
+        <>
+            <label htmlFor="title" className="input-label">
+                Title
+            </label>
+            <input
+                id="title"
+                type={props.type}
+                onChange={props.onchange}
+                className="text-input"
+                autoFocus
+                required
+            />
+        </>
     );
 };
 
