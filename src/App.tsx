@@ -1,14 +1,18 @@
 import "./App.css";
 import InputField from "./Components/InputField";
-import Button from "./Components/Button";
-import List from "./Components/List";
-import ListItem from "./Components/ListItem";
+import ButtonComp from "./Components/ButtonComp.tsx";
+import ListItemComp from "./Components/ListItemComp.tsx";
 import TextArea from "./Components/TextArea";
 import { useEffect, useState } from "react";
+import {BottomNavigation, BottomNavigationAction, List} from "@mui/material";
+import RestoreIcon from '@mui/icons-material/Restore';
+
 
 interface Task {
     title: string;
+    description: string;
     id: number;
+    checked: boolean;
 }
 
 function App() {
@@ -18,7 +22,6 @@ function App() {
         JSON.parse((localStorage.getItem("tasks") as string) || "[]")
     );
     const id = tasks.length ? tasks[tasks.length - 1].id + 1 : 1;
-    const [showHide, setShowHide] = useState<boolean>(false);
 
     const handleAddTask = () => {
         if (description.trim() !== "") {
@@ -27,7 +30,7 @@ function App() {
                 {
                     id: id,
                     title: title.trim(),
-                    text: description.trim(),
+                    description: description.trim(),
                     checked: false,
                 },
             ]);
@@ -56,48 +59,62 @@ function App() {
     return (
         <>
             <form
-                className="input-card"
-                // style={showHide ? { display: "flex" } : { display: "none" }}
                 onSubmit={handleAddTask}
+                style={{ display: "flex",
+                            flexDirection: "column",}}
             >
                 <InputField
                     type="text"
                     onchange={(e) => setTitle(e.target.value)}
                 />
                 <TextArea onchange={(e) => setDescription(e.target.value)} />
-                <div className="button-wrapper">
-                    <Button text="+ Add" type="submit" />
-                    <Button
+                <div>
+                    <ButtonComp text="Add" type="submit" />
+                    <ButtonComp
                         text="Empty list"
                         onclick={(e) => {
-                            e.preventDefault(), setTasks([]);
+                            e.preventDefault();
+                            setTasks([]);
                         }}
                     />
                 </div>
             </form>
-            <List
-                li={tasks.map((item: any) => {
-                    return (
-                        <ListItem
-                            key={item.id}
-                            id={item.id}
-                            title={item.title}
-                            description={item.text}
-                            checked={item.checked}
-                            style={
-                                item.checked
-                                    ? {
-                                          textDecoration: "line-through",
-                                          color: "gray",
-                                      }
-                                    : undefined
-                            }
-                            onchange={() => handleCheckTask(item.id)}
-                            clickDelete={() => handleDeleteTask(item.id)}
-                        />
-                    );
-                })}
-            />
+            <List>
+                { tasks.map((item: Task) => {
+                        return (
+                            <ListItemComp
+                                key={item.id}
+                                id={item.id}
+                                title={item.title}
+                                description={item.description}
+                                checked={item.checked}
+                                style={
+                                    item.checked
+                                        ? {
+                                            textDecoration: "line-through",
+                                            color: "gray",
+                                        }
+                                        : undefined
+                                }
+                                onchange={() => handleCheckTask(item.id)}
+                                clickDelete={() => handleDeleteTask(item.id)}
+                            />
+                        );
+                    })
+                }
+            </List>
+
+            <BottomNavigation
+                showLabels
+                sx={{bottom: 0, position: "fixed",
+                    width: "100vw",
+                alignSelf: "center",
+                margin: "0",
+                }}>
+                <BottomNavigationAction label="Recents" icon={<RestoreIcon />} />
+                <BottomNavigationAction label="Favorites" icon={<RestoreIcon />} />
+                <BottomNavigationAction label="Nearby" icon={<RestoreIcon />} />
+            </BottomNavigation>
         </>
     );
 }
