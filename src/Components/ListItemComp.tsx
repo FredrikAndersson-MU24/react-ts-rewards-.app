@@ -5,9 +5,9 @@ import * as React from "react";
 interface ListItemProps {
     id: number;
     title: string;
-    description: string;
+    body: string;
     points: number;
-    checked: boolean;
+    done: boolean;
     style: React.CSSProperties | undefined;
     onchange: React.ChangeEventHandler<HTMLInputElement>;
     clickDelete: React.MouseEventHandler;
@@ -33,7 +33,7 @@ const ListItemComp = (props: ListItemProps) => {
                     >
                         <Typography component="span"
                                     sx={{
-                                        ...(props.checked
+                                        ...(props.done
                                             ? {textDecoration: "line-through"}
                                             : {textDecoration: "none"}),
                                         flex: 1,
@@ -42,7 +42,7 @@ const ListItemComp = (props: ListItemProps) => {
                         </Typography>
                         <Typography component="span"
                                     sx={{
-                                        ...(props.checked
+                                        ...(props.done
                                             ? {textDecoration: "line-through"}
                                             : {textDecoration: "none"}),
                                         alignSelf: "center",
@@ -53,7 +53,7 @@ const ListItemComp = (props: ListItemProps) => {
                             sx={{
                                 marginLeft: "auto",
                             }}
-                            checked={props.checked}
+                            checked={props.done ?? false}
                             onChange={props.onchange}
                             onClick={e => {
                                 e.stopPropagation();
@@ -64,7 +64,7 @@ const ListItemComp = (props: ListItemProps) => {
                     </AccordionSummary>
                     <AccordionDetails>
                         <Typography>
-                            {props.description}
+                            {props.body}
                         </Typography>
                         <DeleteOutline
                             onClick={props.clickDelete}
