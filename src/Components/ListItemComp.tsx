@@ -1,4 +1,4 @@
-import {DeleteOutline} from "@mui/icons-material";
+import {DeleteForeverOutlined, DeleteOutline} from "@mui/icons-material";
 import {Accordion, AccordionDetails, AccordionSummary, Checkbox, ListItem, Typography} from "@mui/material";
 import * as React from "react";
 
@@ -14,6 +14,7 @@ interface ListItemProps {
 }
 
 const ListItemComp = (props: ListItemProps) => {
+    const [hover, setHover] = React.useState(false);
     return (
         <>
             <ListItem key={props.id} sx={{display: "flex", width: "100%", elevation: 5,}}>
@@ -66,14 +67,31 @@ const ListItemComp = (props: ListItemProps) => {
                         <Typography>
                             {props.body}
                         </Typography>
-                        <DeleteOutline
-                            onClick={props.clickDelete}
-                            sx={{
-                                marginTop: "1em",
-                                alignSelf: "center",
-                            }}
-                            fontSize="large"
-                        />
+                        <div onMouseEnter={() => setHover(true)}
+                             onMouseLeave={() => setHover(false)}
+                        style={{width: "2em"}}>
+                            {hover ? (
+                                <DeleteForeverOutlined
+                                    onClick={props.clickDelete}
+                                    sx={{
+                                        marginTop: "1em",
+                                        alignSelf: "center",
+                                        cursor: "pointer",
+                                    }}
+                                    fontSize="large"
+                                />
+                            ) : (
+                                <DeleteOutline
+                                    onClick={props.clickDelete}
+                                    sx={{
+                                        marginTop: "1em",
+                                        alignSelf: "center",
+                                        cursor: "pointer",
+                                    }}
+                                    fontSize="large"
+                                />
+                            )}
+                        </div>
                     </AccordionDetails>
                 </Accordion>
 
