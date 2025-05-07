@@ -24,53 +24,53 @@ function App() {
     const [tasks, setTasks] = useState<Array<Task>>(
         JSON.parse((localStorage.getItem("tasks") as string) || "[]")
     );
-    const id = tasks.length ? tasks[tasks.length - 1].id + 1 : 1;
+
 
     useEffect(() => {
-        const fetchTasks = async () => {
-            try {
-                const response = await api.get('/tasks');
-                setTasks(response.data);
-                console.log(response.data);
-            } catch (error) {
-                console.log(error);
-            }
-        }
-
-        fetchTasks();
+        handleGetAllTasks();
     }, []);
+
+    const handleGetAllTasks = () => {
+        api.get('/tasks').then(response => {
+            setTasks(response.data);
+            console.log(response.data);
+        }).catch(error => console.log(error));
+    }
 
     const handleAddTask = () => {
         if (description.trim() !== "") {
-            setTasks((a) => [
-                ...a,
+            api.post('/tasks',
                 {
-                    id: id,
                     title: title.trim(),
                     body: description.trim(),
                     points: points,
-                    done: false,
-                },
-            ]);
+                }).then(response => {
+                setTasks(response.data);
+                console.log("Log from handleAddTask");
+            }).catch(error =>
+                console.log(error));
+            setTitle("");
+            setDescription("");
+            setPoints(0);
         }
     };
 
     const handleCheckTask = (id: number) => {
-        const toggleTaskDone = async () => {
-            try {
-                const response = await api.patch('/tasks/' + id + '/toggle');
-                console.log(response.data);
-            } catch (error) {
-                console.log(error);
-            }
-        }
-
-        toggleTaskDone();
+        api.patch('/tasks/' + id + '/toggle').then(response => {
+            console.log(response.data);
+            handleGetAllTasks();
+        })
+            .catch(error =>
+                console.log(error));
     };
 
     const handleDeleteTask = (id: number) => {
-        const tempArray = tasks.filter((item) => Number(item.id) !== id);
-        setTasks(tempArray);
+        api.delete('/tasks/' + id).then(response => {
+            console.log(response.data);
+            console.log("Log from deleteTask");
+            handleGetAllTasks();
+        }).catch(error =>
+            console.log(error));
     };
 
     return (
