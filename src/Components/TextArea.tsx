@@ -8,11 +8,15 @@ type TextAreaProps = {
 const TextArea = (props: TextAreaProps) => {
     return (
         <>
-            <TextField label="Description" variant="outlined" multiline rows={4}
-                       onChange={props.onchange}
-                       id="text"
-                       required
-                       className="text-area"/>
+            <TextField
+                sx={{marginTop: "1em"}}
+                label="Description"
+                variant="outlined"
+                multiline rows={4}
+                onChange={props.onchange}
+                id="text"
+                required
+                className="text-area"/>
         </>
     );
 };

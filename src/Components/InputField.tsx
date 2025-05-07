@@ -9,11 +9,14 @@ interface InputFieldProps {
 const InputField = (props: InputFieldProps) => {
     return (
         <>
-            <TextField label="Title" variant="outlined"
-                       onChange={props.onchange}
-                       id="title"
-                       required
-                       autoFocus/>
+            <TextField
+                sx={{marginTop: "1em"}}
+                label="Title"
+                variant="outlined"
+                onChange={props.onchange}
+                id="title"
+                required
+                autoFocus/>
         </>
     );
 };

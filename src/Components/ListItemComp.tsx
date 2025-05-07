@@ -19,7 +19,7 @@ const ListItemComp = (props: ListItemProps) => {
             <ListItem key={props.id} sx={{display: "flex", width: "90VW", elevation: 5,}}>
                 <Accordion
                 sx={{   flex: 1,
-                    elevation: 5,
+                    marginBottom: "0.2em",
                 }}>
                     <AccordionSummary
                         expandIcon={<ArrowDropDownIcon/>}
@@ -28,6 +28,7 @@ const ListItemComp = (props: ListItemProps) => {
                         sx={{display: "flex",
                             flexDirection: "row",
                             justifyContent: "space-between",
+
                             width: "100%",
                         }}
                     >
@@ -37,7 +38,7 @@ const ListItemComp = (props: ListItemProps) => {
                                         ? {textDecoration: "line-through"}
                                         : {textDecoration: "none"}),
                                         flex: 1,
-
+                                        alignSelf: "center",
                                     }}>{props.title}
                         </Typography>
                         <Checkbox
@@ -48,6 +49,7 @@ const ListItemComp = (props: ListItemProps) => {
                             onChange={props.onchange}
                             onClick={e => {e.stopPropagation();}}
                             id={props.id.toString()}
+                            size="large"
                         />
                     </AccordionSummary>
                     <AccordionDetails>

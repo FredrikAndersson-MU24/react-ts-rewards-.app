@@ -10,7 +10,11 @@ export interface ButtonProps {
 const ButtonComp = (props: ButtonProps) => {
     return (
         <>
-            <Button variant="outlined" onClick={props.onclick} type={props.type}>{props.text}</Button>
+            <Button
+                sx={{margin: "1em"}}
+                variant="outlined"
+                onClick={props.onclick}
+                type={props.type}>{props.text}</Button>
         </>
     );
 };

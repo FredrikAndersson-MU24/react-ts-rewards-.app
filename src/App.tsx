@@ -4,8 +4,9 @@ import ButtonComp from "./Components/ButtonComp.tsx";
 import ListItemComp from "./Components/ListItemComp.tsx";
 import TextArea from "./Components/TextArea";
 import { useEffect, useState } from "react";
-import {BottomNavigation, BottomNavigationAction, List} from "@mui/material";
+import {BottomNavigation, BottomNavigationAction, List, ListItemIcon} from "@mui/material";
 import RestoreIcon from '@mui/icons-material/Restore';
+import {Add, AddCircleOutline, AddOutlined, ListAltOutlined, PlusOneOutlined} from "@mui/icons-material";
 
 
 interface Task {
@@ -58,18 +59,20 @@ function App() {
 
     return (
         <>
+            <div style={{margin: "1em"}}>
+
             <form
                 onSubmit={handleAddTask}
                 style={{ display: "flex",
-                            flexDirection: "column",}}
+                            flexDirection: "column",
+                            }}
             >
                 <InputField
                     type="text"
                     onchange={(e) => setTitle(e.target.value)}
                 />
                 <TextArea onchange={(e) => setDescription(e.target.value)} />
-                <div>
-                    <ButtonComp text="Add" type="submit" />
+                <div style={{display: "flex", justifyContent: "space-between"}}>
                     <ButtonComp
                         text="Empty list"
                         onclick={(e) => {
@@ -77,6 +80,8 @@ function App() {
                             setTasks([]);
                         }}
                     />
+                    <ButtonComp text="Add" type="submit" />
+
                 </div>
             </form>
             <List>
@@ -103,6 +108,7 @@ function App() {
                     })
                 }
             </List>
+            </div>
 
             <BottomNavigation
                 showLabels
@@ -110,10 +116,12 @@ function App() {
                     width: "100vw",
                 alignSelf: "center",
                 margin: "0",
+                    backgroundColor: "lightblue",
+                    elevation: "2dp",
                 }}>
-                <BottomNavigationAction label="Recents" icon={<RestoreIcon />} />
-                <BottomNavigationAction label="Favorites" icon={<RestoreIcon />} />
-                <BottomNavigationAction label="Nearby" icon={<RestoreIcon />} />
+                <BottomNavigationAction label="History" icon={<RestoreIcon />} />
+                <BottomNavigationAction label="Add" icon={<AddCircleOutline />} />
+                <BottomNavigationAction label="List" icon={<ListAltOutlined />} />
             </BottomNavigation>
         </>
     );
