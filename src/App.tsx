@@ -7,14 +7,14 @@ import {useEffect, useState} from "react";
 import {BottomNavigation, BottomNavigationAction, List} from "@mui/material";
 import RestoreIcon from '@mui/icons-material/Restore';
 import {AddCircleOutline, ListAltOutlined} from "@mui/icons-material";
-
+import api from './api/tasks.tsx';
 
 interface Task {
     id: number;
     title: string;
-    description: string;
+    body: string;
     points: number;
-    checked: boolean;
+    done: boolean;
 }
 
 function App() {
@@ -24,41 +24,54 @@ function App() {
     const [tasks, setTasks] = useState<Array<Task>>(
         JSON.parse((localStorage.getItem("tasks") as string) || "[]")
     );
-    const id = tasks.length ? tasks[tasks.length - 1].id + 1 : 1;
+
+
+    useEffect(() => {
+        handleGetAllTasks();
+    }, []);
+
+    const handleGetAllTasks = () => {
+        api.get('/tasks').then(response => {
+            setTasks(response.data);
+            console.log(response.data);
+        }).catch(error => console.log(error));
+    }
 
     const handleAddTask = () => {
         if (description.trim() !== "") {
-            setTasks((a) => [
-                ...a,
+            api.post('/tasks',
                 {
-                    id: id,
                     title: title.trim(),
-                    description: description.trim(),
+                    body: description.trim(),
                     points: points,
-                    checked: false,
-                },
-            ]);
+                }).then(response => {
+                setTasks(response.data);
+                console.log("Log from handleAddTask");
+            }).catch(error =>
+                console.log(error));
+            setTitle("");
+            setDescription("");
+            setPoints(0);
         }
     };
 
     const handleCheckTask = (id: number) => {
-        const tempArray = tasks.map((item) =>
-            item.id === id ? {...item, checked: !item.checked} : item
-        );
-        setTasks(tempArray);
+        api.patch('/tasks/' + id + '/toggle').then(response => {
+            console.log(response.data);
+            handleGetAllTasks();
+        })
+            .catch(error =>
+                console.log(error));
     };
 
     const handleDeleteTask = (id: number) => {
-        const tempArray = tasks.filter((item) => Number(item.id) !== id);
-        setTasks(tempArray);
+        api.delete('/tasks/' + id).then(response => {
+            console.log(response.data);
+            console.log("Log from deleteTask");
+            handleGetAllTasks();
+        }).catch(error =>
+            console.log(error));
     };
-
-    // Save to local storage
-    useEffect(() => {
-        if (tasks) {
-            localStorage.setItem("tasks", JSON.stringify(tasks));
-        }
-    }, [tasks]);
 
     return (
         <>
@@ -106,11 +119,11 @@ function App() {
                                 key={item.id}
                                 id={item.id}
                                 title={item.title}
-                                description={item.description}
+                                body={item.body}
                                 points={item.points}
-                                checked={item.checked}
+                                done={item.done}
                                 style={
-                                    item.checked
+                                    item.done
                                         ? {
                                             textDecoration: "line-through",
                                             color: "gray",
