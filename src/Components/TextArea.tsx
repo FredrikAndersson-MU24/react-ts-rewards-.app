@@ -14,7 +14,7 @@ const TextArea = (props: TextAreaProps) => {
                 variant="outlined"
                 multiline rows={4}
                 onChange={props.onchange}
-                id="text"
+                id="body"
                 required
                 className="text-area"/>
         </>
