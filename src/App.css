@@ -21,6 +21,15 @@ body {
     min-height: 100vh;
 }
 
+.app-container {
+    position: relative;
+    min-height: 100vh;
+}
+
+.page-container {
+    padding-bottom: 4em;
+}
+
 @media (prefers-color-scheme: light) {
     :root {
         color: #213547;
