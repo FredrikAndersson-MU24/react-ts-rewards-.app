@@ -23,7 +23,8 @@ function ListPage() {
         setLoading(true);
         handleGetAllTasks();
         setTimeout(
-            () => {        setLoading(false);
+            () => {
+                setLoading(false);
             }, 800)
 
 
@@ -58,7 +59,8 @@ function ListPage() {
             console.log(error));
     };
     return (
-        <>{loadingError ? (<Typography sx={{justifySelf: "center"}}>{errorMessage}</Typography>) : (loading ? (<CircularProgress size={"5em"} sx={{display: "flex", justifySelf: "center", marginTop: "20vh"}}/>) : (
+        <>{loadingError ? (<Typography sx={{justifySelf: "center"}}>{errorMessage}</Typography>) : (loading ? (
+            <CircularProgress size={"5em"} sx={{display: "flex", justifySelf: "center", marginTop: "20vh"}}/>) : (
             tasks.length === 0 ? (<Typography sx={{justifySelf: "center"}}>No tasks</Typography>) :
                 (<List>
                     {tasks.map((item: Task) => {
@@ -86,9 +88,7 @@ function ListPage() {
                     }
                 </List>)
         ))}
-
         </>
-
     )
 }
 

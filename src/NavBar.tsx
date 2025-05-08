@@ -1,6 +1,6 @@
 import {BottomNavigation, BottomNavigationAction} from "@mui/material";
 import RestoreIcon from "@mui/icons-material/Restore";
-import {AddCircleOutline, ListAltOutlined} from "@mui/icons-material";
+import {AddCircleOutline, ListAltOutlined, Settings} from "@mui/icons-material";
 import {useNavigate} from "react-router-dom";
 
 function NavBar() {
@@ -17,9 +17,11 @@ function NavBar() {
                 margin: "0",
                 backgroundColor: "lightblue",
             }}>
+            <BottomNavigationAction onClick={() => navigate("/")} label="Settings" icon={<Settings/>}/>
             <BottomNavigationAction  label="History" icon={<RestoreIcon/>}/>
             <BottomNavigationAction onClick={() => navigate("/add")} label="Add" icon={<AddCircleOutline/>}/>
             <BottomNavigationAction onClick={() => navigate("/")} label="List" icon={<ListAltOutlined/>}/>
+
         </BottomNavigation>
     )
 }
