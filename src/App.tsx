@@ -13,19 +13,17 @@ function App() {
 
     return (
         <>
-
                 <div className="app-container">
                     <div className="page-container">
                         <Routes>
                             <Route path="/add" element={<AddTaskPage/>}/>
+                            <Route path="/settings" element={<SettingsPage/>}/>
+                            <Route path="/history" element={<HistoryPage/>}/>
                             <Route path="/" element={<ListPage/>}/>
                         </Routes>
                     </div>
                     <NavBar/>
                 </div>
-
-
-
         </>
     );
 }
