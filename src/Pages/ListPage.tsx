@@ -1,7 +1,7 @@
 import {CircularProgress, List, Typography} from "@mui/material";
-import ListItemComp from "./Components/ListItemComp.tsx";
+import ListItemComp from "../Components/ListItemComp.tsx";
 import {useEffect, useState} from "react";
-import api from "./api/tasks.tsx";
+import api from "../api/tasks.tsx";
 
 interface Task {
     id: number;

@@ -1,5 +1,5 @@
-import ButtonComp from "./Components/ButtonComp.tsx";
-import api from "./api/tasks.tsx";
+import ButtonComp from "../Components/ButtonComp.tsx";
+import api from "../api/tasks.tsx";
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {TextField} from "@mui/material";
