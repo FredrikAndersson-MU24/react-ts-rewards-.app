@@ -15,10 +15,10 @@ function NavBar() {
                 height: "4em",
                 alignSelf: "center",
                 margin: "0",
-                backgroundColor: "lightblue",
+                backgroundColor: "lightgoldenrodyellow",
             }}>
-            <BottomNavigationAction onClick={() => navigate("/")} label="Settings" icon={<Settings/>}/>
-            <BottomNavigationAction  label="History" icon={<RestoreIcon/>}/>
+            <BottomNavigationAction onClick={() => navigate("/settings")} label="Settings" icon={<Settings/>}/>
+            <BottomNavigationAction  onClick={() => navigate("/history")} label="History" icon={<RestoreIcon/>}/>
             <BottomNavigationAction onClick={() => navigate("/add")} label="Add" icon={<AddCircleOutline/>}/>
             <BottomNavigationAction onClick={() => navigate("/")} label="List" icon={<ListAltOutlined/>}/>
 
