@@ -1,9 +1,10 @@
 import "./App.css";
-import NavBar from "./NavBar.tsx";
-import AddTaskPage from "./AddTaskPage.tsx";
-import ListPage from "./ListPage.tsx";
+import NavBar from "./Components/NavBar.tsx";
+import AddTaskPage from "./Pages/AddTaskPage.tsx";
+import ListPage from "./Pages/ListPage.tsx";
+import SettingsPage from "./Pages/SettingsPage.tsx";
+import HistoryPage from "./Pages/HistoryPage.tsx";
 import {
-    BrowserRouter as Router,
     Route, Routes
 } from 'react-router-dom';
 
