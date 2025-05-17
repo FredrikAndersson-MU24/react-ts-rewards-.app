@@ -7,6 +7,7 @@ import HistoryPage from "./Pages/HistoryPage.tsx";
 import {
     Route, Routes
 } from 'react-router-dom';
+import LoginPage from "./Pages/LoginPage.tsx";
 
 function App() {
 
@@ -19,7 +20,8 @@ function App() {
                             <Route path="/add" element={<AddTaskPage/>}/>
                             <Route path="/settings" element={<SettingsPage/>}/>
                             <Route path="/history" element={<HistoryPage/>}/>
-                            <Route path="/" element={<ListPage/>}/>
+                            <Route path="/list" element={<ListPage/>}/>
+                            <Route path="/" element={<LoginPage/>}/>
                         </Routes>
                     </div>
                     <NavBar/>
