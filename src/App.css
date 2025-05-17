@@ -5,7 +5,7 @@
 
     color-scheme: light dark;
     color: black;
-    background-color: white;
+    background-color: lightyellow;
     overflow-x: hidden;
 
     font-synthesis: none;
@@ -27,6 +27,8 @@ body {
 }
 
 .page-container {
+    justify-self: center;
+    width: 90%;
     padding-bottom: 4em;
 }
 
