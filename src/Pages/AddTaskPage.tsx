@@ -28,7 +28,7 @@ function AddTaskPage() {
                 setTitle("");
                 setDescription("");
                 setPoints(0);
-                navigate("/");
+                navigate("/list");
                 console.log("Log after navigate");
             } catch (error) {
                 console.log(error);
